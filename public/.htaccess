@@ -15,9 +15,8 @@ AddDefaultCharset utf-8
   RewriteCond %{HTTP_HOST} ^sempl\.cz$ [NC]
   RewriteRule ^ https://www.sempl.cz%{REQUEST_URI} [L,R=301]
 
-  # Old WordPress pages
+  # Old WordPress pages (/cookies/ is kept as a standalone page)
   RewriteRule ^kontakt/?$ /#kontakt [NE,L,R=301]
-  RewriteRule ^cookies/?$ / [L,R=301]
   RewriteRule ^feed/?$ / [L,R=301]
 
   # Old WordPress internals are gone for good
