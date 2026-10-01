@@ -2,6 +2,18 @@
 
 Plain HTML/CSS with a tiny optional JS file. There is no PHP, no database, no CMS, no cookies and no third-party requests.
 
+## Deploy (Coolify)
+
+1. Create a **Docker Compose** application in Coolify and connect this repository.
+2. Set the Compose file to `/compose.yaml`.
+3. In the `website` service, set the domain to `https://www.sempl.cz` (port 80 is used automatically).
+4. Add `https://sempl.cz` too if Coolify should redirect the bare domain to `www`, then select **Redirect to www** in its domain settings.
+5. Deploy. The Compose health check verifies the nginx server through `/health`.
+
+The service uses only `expose: 80`; it deliberately does not publish a host port, because Coolify's proxy reaches it over the internal Docker network. TLS and the canonical `www` redirect are managed in Coolify.
+
+For a local smoke test, temporarily add `ports: ["8080:80"]` to the `website` service and open `http://localhost:8080`.
+
 ## Deploy (FTP)
 1. Back up the current WordPress files and database, then delete them from the web root (`wp-*`, `index.php`, `xmlrpc.php`, …).
 2. Upload the **contents** of `public/` to the web root. Include the hidden `.htaccess`, since some FTP clients hide dotfiles.
